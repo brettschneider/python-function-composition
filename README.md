@@ -161,7 +161,7 @@ def create_filepath(area: str) -> Path:
 
 
 @composable
-def read_file_lines(file_path: Path) -> list[str]:
+def read_lines(file_path: Path) -> list[str]:
     """Step 2 -  read file into a list of strings"""
     with open(file_path) as infile:
         buf = infile.read()
@@ -169,20 +169,20 @@ def read_file_lines(file_path: Path) -> list[str]:
 
 
 @composable
-def parse_lines_to_dicts(lines: list[str]) -> list[dict]:
+def parse_dicts(lines: list[str]) -> list[dict]:
     """Step 3 - Parse each JSON into a dictionary"""
     return [json.loads(line) for line in lines]
 
 
 @composable
-def convert_dicts_to_contacts(dicts: list[dict]) -> list[Contact]:
+def convert_to_contacts(dicts: list[dict]) -> list[Contact]:
     """Step 4 - Convert each json record into a Pydantic Model"""
     return [Contact(**rec) for rec in dicts]
 
 
 @app.get('/api/people/{area}')
 def get_people(area: str) -> list[Contact]:
-    chain = create_filepath | read_file_lines | parse_lines_to_dicts | convert_dicts_to_contacts
+    chain = create_filepath | read_lines | parse_dicts | convert_to_contacts
     return chain(area)
 ```
 
@@ -211,6 +211,8 @@ readable.
 ```python
 @app.get('/api/people/{area}')
 def get_people(area: str) -> list[Contact]:
-    return area | create_filepath | read_file_lines | parse_lines_to_dicts | convert_dicts_to_contacts
+    return area | create_filepath | read_lines | parse_dicts | convert_to_contacts
 ```
 
+A full, runnable copy of the source code for this article can be found at
+[https://github.com/brettschneider/python-function-composition](https://github.com/brettschneider/python-function-composition).
