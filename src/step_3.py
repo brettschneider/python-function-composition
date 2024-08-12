@@ -67,8 +67,7 @@ def convert_to_contacts(dicts: list[dict]) -> list[Contact]:
 
 @app.get('/api/people/{area}')
 def get_people(area: str) -> list[Contact]:
-    chain = create_filepath | read_lines | parse_dicts | convert_to_contacts
-    return chain(area)
+    return area | create_filepath | read_lines | parse_dicts | convert_to_contacts
 
 
 if __name__ == '__main__':

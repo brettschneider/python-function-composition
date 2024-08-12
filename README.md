@@ -11,7 +11,7 @@ and the Unix philosophy of "do one thing well." Following SRP allows developers 
 create code that is cleaner, more maintainable, and easier to extend, laying a strong
 foundation for robust software design.
 
-Here's an example of a function that does not following SRP.  As you can see it's doing
+Here's an example of a function that does not follow SRP.  As you can see it's doing
 multiple steps all in one function.
 
 ```python
@@ -38,9 +38,9 @@ def get_people(area: str) -> list[Contact]:
 ```
 
 The problem with this is, the function is doing too much.  This can make testing
-unnecessarily difficult.  Additionally, if future request require similar functionality,
-the code buried someone "in the middle" of this function cannot be reused.  Finally, as more
-functionality is added to **this** request it will continue to become more complex and even
+unnecessarily difficult.  Additionally, if future requests require similar functionality,
+the code buried somewhere "in the middle" of this function cannot be reused.  Finally, as more
+functionality is added to **this** request, it will continue to become more complex and even
 harder to test.
 
 Here's some code that performs the exact same functionality, but each step has been
@@ -197,8 +197,8 @@ a shell prompt), each function in the refactored `get_people` implementation bec
 reusable and can be easily incorporated into other compositions within your FastAPI
 application. This modular approach allows you to repurpose these functions for various tasks,
 streamlining the development of new features and endpoints. For example, you might use
-`create_filepath` and `read_file_lines` for different endpoints that need to process files,
-or `parse_lines_to_dicts` and `convert_dicts_to_contacts` in other contexts where JSON data
+`create_filepath` and `read_lines` for different endpoints that need to process files,
+or `parse_dicts` and `convert_to_contacts` in other contexts where JSON data
 needs to be handled. The clear, composable chaining syntax not only enhances readability but
 also supports the creation of flexible and maintainable code that can adapt to evolving
 requirements. As your application grows, this reusable design will facilitate the development
