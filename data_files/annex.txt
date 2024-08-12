@@ -1,0 +1,3 @@
+{"name": "kelly", "job": "marketing", "pay": "unknown"}
+{"name": "ryan", "job": "intern", "pay": 0.00}
+{"name": "toby", "job": "HR", "pay": 1.00}
